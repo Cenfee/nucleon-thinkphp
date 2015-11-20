@@ -1,0 +1,20 @@
+﻿<IfModule mod_rewrite.c>
+		RewriteEngine on
+	
+	RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+  	RewriteRule nucleon-thinkphp/server/(.*)$ nucleon-thinkphp/server/index.php/$1 [QSA,PT]
+	
+	
+	RewriteCond %{HTTP_REFERER} !^http://(.+\.)?test0\.com/ [NC]  
+	RewriteCond %{HTTP_REFERER} !^$  
+	# wordpress主题下载站提醒：/notlink.png为盗链显示的图片，建议使用小尺寸的，以免因为图片太大，二次浪费！  
+	RewriteRule .*\.(jpe?g|gif|bmp|png|mp3)$ /notlink.png [L]  
+
+
+	RewriteCond %{SERVER_PORT} !^443$
+	RewriteCond %{REQUEST_URI} !^/tz.php
+	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R]
+	
+</IfModule>
